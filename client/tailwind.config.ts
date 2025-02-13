@@ -1,3 +1,4 @@
+import { link } from "fs";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -11,6 +12,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        bgPrimary: "#F6F8F5",
+
+        primary: "#536942",
+        secondary: "#526840BF",
+        link: "#FFD936",
+        linkHover: "#DAB200",
+      },
+      fontFamily: {
+        serif: ["Lora", "serif"],
       },
     },
   },
