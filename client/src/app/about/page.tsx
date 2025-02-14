@@ -6,7 +6,7 @@ export default function About() {
       <section className="py-20 bg-bgPrimary">
         <div className="container mx-auto px-6 max-w-6xl text-center">
           {/* Vision Statement */}
-          <h2 className="text-4xl font-serif text-primary font-semibold leading-snug">
+          <h2 className="text-4xl font-serif text-title font-semibold leading-snug">
             We’re a highly collaborative and innovative team, <br />
             committed to delivering customized solar solutions <br />
             that meet our clients’ unique needs.
@@ -16,7 +16,7 @@ export default function About() {
           <div className="mt-12 flex flex-col lg:flex-row items-center gap-12 text-left">
             {/* Left - Text */}
             <div className="lg:w-3/5">
-              <p className="text-xl text-secondary leading-relaxed">
+              <p className="text-xl  leading-relaxed">
                 Founded in 2005 and headquartered in New Jersey, with an
                 additional office in North Miami Beach, FL, SolarPath Sun
                 Solutions is a leader in the solar energy industry. We
@@ -24,7 +24,7 @@ export default function About() {
                 and LED fixtures, delivering customized, grid-independent
                 infrastructure solutions.
               </p>
-              <p className="text-xl text-secondary mt-4 leading-relaxed">
+              <p className="text-xl  mt-4 leading-relaxed">
                 Under the leadership of our founder, Roy Warshavsky, we innovate
                 with products ranging from pathway lighting to advanced LED
                 roadway systems, blending functionality with aesthetic appeal.
@@ -32,7 +32,7 @@ export default function About() {
                 the International Dark-Sky Association, we prioritize
                 environmentally friendly and energy-efficient designs.
               </p>
-              <p className="text-xl text-secondary mt-4 leading-relaxed">
+              <p className="text-xl  mt-4 leading-relaxed">
                 Our extensive lineup includes solar streetlights, parking and
                 pathway lighting, traffic signs, and security cameras. At
                 SolarPath, we’re dedicated to creating sustainable, high-quality
@@ -56,10 +56,10 @@ export default function About() {
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 text-center">
             {/* Mission */}
             <div>
-              <h3 className="text-2xl font-serif text-primary font-semibold">
+              <h3 className="text-2xl font-serif text-title font-semibold">
                 Our Mission
               </h3>
-              <p className="text-xl text-secondary mt-4 leading-relaxed">
+              <p className="text-xl  mt-4 leading-relaxed">
                 To create exceptional value through solar-powered lighting and
                 sustainable solutions, inspiring environmentally friendly
                 advancements in every project.
@@ -68,10 +68,10 @@ export default function About() {
 
             {/* Values */}
             <div>
-              <h3 className="text-2xl font-serif text-primary font-semibold">
+              <h3 className="text-2xl font-serif text-title font-semibold">
                 Our Values
               </h3>
-              <p className="text-xl text-secondary mt-4 leading-relaxed">
+              <p className="text-xl  mt-4 leading-relaxed">
                 We strive to go above and beyond, delivering our very best work
                 daily while promoting eco-friendly and aesthetically appealing
                 designs.
@@ -85,7 +85,7 @@ export default function About() {
         <div className="container mx-auto px-6 max-w-4xl text-center">
           {/* Profile Image */}
           <div className="flex justify-center">
-            <div className="w-40 h-40 rounded-full border-2 border-primary p-2">
+            <div className="w-40 h-40 rounded-full border-2 border-title p-2">
               <Image
                 src="/about/roy.jpeg"
                 alt="Roy Warshavsky"
@@ -97,15 +97,15 @@ export default function About() {
           </div>
 
           {/* Name & Title */}
-          <h2 className="text-3xl font-serif text-primary font-semibold mt-6">
+          <h2 className="text-3xl font-serif text-title font-semibold mt-6">
             Roy Warshavsky
           </h2>
-          <p className="text-xl text-secondary mt-2">
+          <p className="text-xl text-subtitle mt-2">
             Founder & CEO of Solarpath
           </p>
 
           {/* Description */}
-          <p className="text-xl text-secondary mt-6 leading-relaxed">
+          <p className="text-xl  mt-6 leading-relaxed">
             Roy Warshavsky, experienced founder of both SolarPath and M.S.L USA,
             is a recognized pioneer in the solar energy sector. Roy has been
             instrumental in driving sustainable solar lighting solutions

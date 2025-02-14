@@ -12,7 +12,7 @@ export default function Navbar() {
         </Link>
 
         {/* Navigation Links */}
-        <div className="space-x-8 text-primary text-lg font-medium">
+        <div className="space-x-8 text-title text-lg font-medium">
           <Link href="/products" className="hover:text-amber-400 transition">Products</Link>
           <Link href="/services" className="hover:text-amber-400 transition">Services</Link>
           <Link href="/about" className="hover:text-amber-400 transition">About</Link>

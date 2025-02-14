@@ -6,12 +6,12 @@ export default function Services() {
       <section className="py-20 bg-bgPrimary text-center">
         <div className="container mx-auto px-6 max-w-5xl">
           {/* Title */}
-          <h2 className="text-4xl font-serif font-semibold text-primary">
+          <h2 className="text-4xl font-serif font-semibold text-title">
             Light Quality and the Role of Color Temperature
           </h2>
 
           {/* Description */}
-          <div className="mt-6 space-y-6 text-secondary text-lg leading-relaxed">
+          <div className="mt-6 space-y-6  text-lg leading-relaxed">
             <p>
               There is ongoing confusion about how artificial lighting impacts
               human vision in darkness. Traditional lighting measurements focus
@@ -62,17 +62,17 @@ export default function Services() {
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10">
             {/* Left - Text */}
             <div className="lg:w-1/2 text-left">
-              <h2 className="text-3xl font-serif text-primary font-semibold">
+              <h2 className="text-3xl font-serif text-title font-semibold">
                 Photovoltaic Technology (Solar Cells)
               </h2>
-              <p className="mt-4 text-xl text-secondary leading-relaxed">
+              <p className="mt-4 text-xl  leading-relaxed">
                 SolarPath utilizes photovoltaic technology where solar cells
                 convert sunlight directly into electricity. These cells are
                 vital for a variety of applications, from powering small devices
                 like desk calculators and iPod chargers to larger systems such
                 as satellites and solar street lighting.
               </p>
-              <p className="mt-4 text-xl text-secondary leading-relaxed">
+              <p className="mt-4 text-xl  leading-relaxed">
                 Made from semiconducting silicone materials similar to those in
                 computer chips, these cells generate electricity through the
                 photovoltaic (PV) effect—when sunlight energizes electrons to
@@ -107,16 +107,16 @@ export default function Services() {
 
             {/* Right - Text */}
             <div className="lg:w-1/2 text-left">
-              <h2 className="text-3xl font-serif text-primary font-semibold">
+              <h2 className="text-3xl font-serif text-title font-semibold">
                 LED (Light Emitting Diode) Technology
               </h2>
-              <p className="mt-4 text-xl text-secondary leading-relaxed">
+              <p className="mt-4 text-xl  leading-relaxed">
                 LED technology has been transformative in the field of lighting,
                 known for its efficiency and durability. SolarPath’s LEDs do not
                 have filaments that burn out or emit harmful gases, making them
                 more environmentally friendly compared to traditional lighting.
               </p>
-              <p className="mt-4 text-xl text-secondary leading-relaxed">
+              <p className="mt-4 text-xl  leading-relaxed">
                 They are used in various applications, including our LightMark
                 series products, offering longevity from 100,000 to 120,000
                 hours of operation and minimal heat emission.
@@ -130,19 +130,19 @@ export default function Services() {
         <div className="container mx-auto px-6  space-y-12">
           {/* Ultra-Capacitors Section */}
           <div>
-            <h2 className="text-3xl font-serif text-primary font-semibold">
+            <h2 className="text-3xl font-serif text-title font-semibold">
               Ultra-Capacitors
             </h2>
-            <p className="mt-4 text-xl text-secondary leading-relaxed">
+            <p className="mt-4 text-xl  leading-relaxed">
               Our cutting-edge ultra-capacitor energy storage is employed in all
               our ground-installed LightMark™ and LightDeco™ series products.
             </p>
-            <p className="mt-2 text-xl text-secondary leading-relaxed">
+            <p className="mt-2 text-xl  leading-relaxed">
               Replacing conventional batteries, ultra-capacitors enhance energy
               efficiency and sustainability with their quick charge capabilities
               and robust temperature resistance.
             </p>
-            <p className="mt-2 text-xl text-secondary leading-relaxed">
+            <p className="mt-2 text-xl  leading-relaxed">
               These capacitors ensure prolonged operation and consistent
               performance under diverse environmental conditions.
             </p>
@@ -150,15 +150,15 @@ export default function Services() {
 
           {/* VibraProof™ Technology Section */}
           <div>
-            <h2 className="text-3xl font-serif text-primary font-semibold">
+            <h2 className="text-3xl font-serif text-title font-semibold">
               VibraProof™ Technology
             </h2>
-            <p className="mt-4 text-xl text-secondary leading-relaxed">
+            <p className="mt-4 text-xl  leading-relaxed">
               Addressing the challenges of road vibrations, SolarPath has
               developed VibraProof™ technology to protect solar panels and
               electronic circuitry in our lighting products.
             </p>
-            <p className="mt-2 text-xl text-secondary leading-relaxed">
+            <p className="mt-2 text-xl  leading-relaxed">
               This technology safeguards components from micro-flexing and
               micro-fractures, thereby extending the operational lifespan and
               efficiency of our installations in demanding environments.
@@ -167,15 +167,15 @@ export default function Services() {
 
           {/* Engagement and Certifications Section */}
           <div>
-            <h2 className="text-3xl font-serif text-primary font-semibold">
+            <h2 className="text-3xl font-serif text-title font-semibold">
               Engagement and Certifications
             </h2>
-            <p className="mt-4 text-xl text-secondary leading-relaxed">
+            <p className="mt-4 text-xl  leading-relaxed">
               SolarPath is an active member of the U.S. Green Building Council
               and the National Wildlife Lighting Council and holds
               certifications from the International Dark-Sky Association.
             </p>
-            <p className="mt-2 text-xl text-secondary leading-relaxed">
+            <p className="mt-2 text-xl  leading-relaxed">
               These affiliations reflect our commitment to sustainable and
               wildlife-friendly lighting solutions.
             </p>

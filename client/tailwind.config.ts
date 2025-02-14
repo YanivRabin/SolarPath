@@ -14,8 +14,8 @@ export default {
         foreground: "var(--foreground)",
         bgPrimary: "#F6F8F5",
 
-        primary: "#536942",
-        secondary: "#526840BF",
+        title: "#536942",
+        subtitle: "#526840BF",
         link: "#FFD936",
         linkHover: "#DAB200",
       },

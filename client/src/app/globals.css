@@ -18,6 +18,6 @@
 
 body {
   @apply font-serif;
-  color: var(--foreground);
+  color: #000;
   background: var(--background);
 }

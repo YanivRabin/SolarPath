@@ -28,7 +28,7 @@ export default function Home() {
 
             {/* Call-to-Action Button */}
             <Link href="/products">
-              <button className="mt-16 bg-link hover:bg-linkHover text-secondary font-bold py-3 px-6 rounded-lg text-lg">
+              <button className="mt-16 bg-link hover:bg-linkHover text-subtitle font-bold py-3 px-6 rounded-lg text-lg">
                 See Our Products
               </button>
             </Link>
@@ -48,10 +48,10 @@ export default function Home() {
                 height={150}
                 className="rounded-full"
               />
-              <h3 className="mt-4 text-2xl font-semibold text-primary">
+              <h3 className="mt-4 text-2xl font-semibold text-title">
                 Customizable
               </h3>
-              <p className="mt-2 text-lg text-secondary max-w-xs">
+              <p className="mt-2 text-lg  max-w-xs">
                 SolarPath offers fully customizable solar lighting solutions
                 tailored to meet each client’s unique technical and aesthetic
                 requirements.
@@ -67,10 +67,10 @@ export default function Home() {
                 height={150}
                 className="rounded-full"
               />
-              <h3 className="mt-4 text-2xl font-semibold text-primary">
+              <h3 className="mt-4 text-2xl font-semibold text-title">
                 Photometric
               </h3>
-              <p className="mt-2 text-lg text-secondary max-w-xs">
+              <p className="mt-2 text-lg  max-w-xs">
                 We conduct photometric measurements on all our products to
                 ensure optimal performance and compliance with industry
                 standards.
@@ -86,10 +86,10 @@ export default function Home() {
                 height={150}
                 className="rounded-full"
               />
-              <h3 className="mt-4 text-2xl font-semibold text-primary">
+              <h3 className="mt-4 text-2xl font-semibold text-title">
                 Innovative Technology
               </h3>
-              <p className="mt-2 text-lg text-secondary max-w-xs">
+              <p className="mt-2 text-lg  max-w-xs">
                 High-efficiency solar and advanced LEDs deliver superior
                 performance, long life, and maximum ROI.
               </p>
@@ -100,7 +100,7 @@ export default function Home() {
 
       <section className="py-16 bg-bgPrimary">
         <div className="container mx-auto px-6 text-center max-w-4xl">
-          <p className="text-3xl text-primary leading-relaxed">
+          <p className="text-3xl text-title leading-relaxed">
             At <span className="font-semibold">SolarPath Sun Solutions</span>,
             we light the way to a sustainable future with innovative
             solar-powered solutions designed to meet the unique needs of each
@@ -113,26 +113,26 @@ export default function Home() {
         <div className="container mx-auto flex flex-col lg:flex-row items-center gap-12 px-6">
           {/* Left Side - Text Content */}
           <div className="lg:w-1/2 text-left">
-            <p className="text-sm uppercase tracking-widest text-secondary">
+            <p className="text-sm uppercase tracking-widest text-subtitle">
               About Us
             </p>
-            <h2 className="mt-2 text-4xl font-serif text-primary leading-snug">
+            <h2 className="mt-2 text-4xl font-serif text-title leading-snug">
               Lighting the Future with <br /> Solar Innovation
             </h2>
-            <p className="mt-6 text-secondary max-w-lg leading-relaxed">
+            <p className="mt-6  max-w-lg leading-relaxed">
               Founded in 2005, SolarPath Sun Solutions is a leader in
               solar-powered lighting and sustainable infrastructure. With
               cutting-edge designs and customized solutions, we bring
               energy-efficient lighting to private pathways, public spaces, and
               beyond.
             </p>
-            <p className="mt-4 text-secondary">
+            <p className="mt-4 ">
               Illuminate your world with innovation.
             </p>
 
             {/* Button */}
             <Link href="/about">
-              <button className="mt-6 border border-primary text-primary px-6 py-3 rounded-md hover:bg-amber-400 hover:text-primary transition">
+              <button className="mt-6 border border-title text-title px-6 py-3 rounded-md hover:bg-amber-400 hover:text-title transition">
                 Find Out More
               </button>
             </Link>
@@ -177,7 +177,7 @@ export default function Home() {
 
           {/* Button */}
           <Link href="/contact">
-            <button className="mt-6 border border-primary text-primary px-6 py-3 rounded-md hover:bg-amber-400 hover:text-primary transition">
+            <button className="mt-6 border border-title text-title px-6 py-3 rounded-md hover:bg-amber-400 hover:text-title transition">
               Let's Talk Now
             </button>
           </Link>
