@@ -27,11 +27,11 @@ export default function Home() {
             </p>
 
             {/* Call-to-Action Button */}
-            <Link href="/products">
+            {/* <Link href="/products">
               <button className="mt-16 bg-link hover:bg-linkHover text-subtitle font-bold py-3 px-6 rounded-lg text-lg">
                 See Our Products
               </button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
