@@ -2,48 +2,53 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { Product } from "@/types/product";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const products = [
-  {
-    id: "ars-solar-light",
-    name: "ARS Solar Street Light",
-    category: "cobra",
-    image: "/products/ars/ARS.png",
-  },
-  {
-    id: "srl-solar-light",
-    name: "SRL Solar Pathway Light",
-    category: "cobra",
-    image: "/products/srl/SRL.png",
-  },
-  {
-    id: "srs-solar-light",
-    name: "SRS Solar Flood Light",
-    category: "cobra",
-    image: "/products/srs/SRS.png",
-  },
-];
 
 export default function Products() {
-      const params = useParams();
-      const category = params.category;
-    
-      // Filter products based on category
-      const filteredProducts = products.filter((p) => p.category === category);
-    
-      // If no products are found, show a message
-      if (filteredProducts.length === 0) {
-        return (
-          <div className="h-screen flex justify-center items-center text-2xl text-gray-600">
-            No products found in this category.
-          </div>
-        );
+  const params = useParams();
+  const category = params.category;
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/products");
+        setProducts(response.data);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  // Filter products based on category
+  const filteredProducts = products.filter((p) => p.category === category);
+
+  // If no products are found, show a message
+  if (filteredProducts.length === 0) {
+    return (
+      <div className="h-screen flex justify-center items-center text-2xl text-gray-600">
+        No products found in this category.
+      </div>
+    );
+  }
 
   return (
     <div className="h-[calc(100vh-80px)] mx-auto p-8 bg-white">
       <h1 className="text-5xl font-bold mb-6 mt-6 text-center text-title">
-        {typeof category === 'string' ? category.toUpperCase() : ''} Products
+        {typeof category === "string" ? category.toUpperCase() : ""} Products
       </h1>
 
       {/* Grid Container */}
@@ -53,10 +58,7 @@ export default function Products() {
             <div className="border rounded-md shadow-md hover:shadow-lg transition cursor-pointer flex flex-col items-center justify-between p-6">
               {/* Product Image */}
               <div className="w-40 h-40">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                />
+                <img src={product.image} alt={product.name} />
               </div>
 
               {/* Product Name */}

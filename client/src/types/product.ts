@@ -2,14 +2,16 @@ export interface Product {
   id: string;
   name: string;
   category: string;
+  image: string;
   colors: ColorOption[];
   additionalInfo: ProductInfo[];
+  createdAt: Date;
 }
 
 export interface ColorOption {
   code: string;
   name: string;
-  image: string; 
+  image: string;
 }
 
 export interface ProductInfo {

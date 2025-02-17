@@ -2,17 +2,16 @@ import { Request, Response } from "express";
 import { db } from "../config/firebase";
 import { Product } from "../models/productModel";
 import NodeCache from "node-cache";
-import { log } from "console";
 
 // Cache lasts for 1 week (7 days)
 export const cache = new NodeCache({ stdTTL: 7 * 24 * 60 * 60, checkperiod: 7 * 24 * 60 * 60 });
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const { name, category, colors, additionalInfo } = req.body;
+    const { name, category, image, colors, additionalInfo } = req.body;
 
     // Validate required fields
-    if (!name || !category || !colors || !additionalInfo) {
+    if (!name || !category || !image || !colors || !additionalInfo) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
@@ -20,6 +19,7 @@ export const createProduct = async (req: Request, res: Response) => {
     const newProduct: Omit<Product, "id"> = {
       name,
       category,
+      image,
       colors,
       additionalInfo,
       createdAt: new Date(), // Timestamp
@@ -65,3 +65,32 @@ export const getAllProducts = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+export const getProduct = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Check if product exists in cache
+    const cachedProduct = cache.get(id);
+    if (cachedProduct) {
+      console.log("Serving from cache");
+      return res.json(cachedProduct);
+    }
+
+    console.log("Fetching from Firestore...");
+    const doc = await db.collection("products").doc(id).get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const product: Product = { id: doc.id, ...doc.data() } as Product;
+
+    // Store in cache (1 week)
+    cache.set(id, product);
+
+    res.json(product);
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
