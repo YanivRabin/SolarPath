@@ -6,6 +6,7 @@ import { Product } from "@/types/product";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const baseURL = "http://localhost:3001/api/products";
 
 export default function Products() {
   const params = useParams();
@@ -18,7 +19,7 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/products");
+        const response = await axios.get(baseURL);
         setProducts(response.data);
       } catch (err: any) {
         setError(err.message);
@@ -30,8 +31,18 @@ export default function Products() {
     fetchProducts();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="w-1/2 h-1 bg-blue-500 animate-pulse"></div>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <p className="text-title text-3xl font-semibold">{error}</p>
+      </div>
+    );
 
   // Filter products based on category
   const filteredProducts = products.filter((p) => p.category === category);

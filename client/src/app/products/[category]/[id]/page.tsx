@@ -5,6 +5,8 @@ import { Product } from "@/types/product";
 import { useParams } from "next/navigation";
 import axios from "axios";
 
+const baseURL = "http://localhost:3001/api/products";
+
 export default function SingleProduct() {
   const params = useParams();
   const id = params.id;
@@ -23,9 +25,7 @@ export default function SingleProduct() {
       try {
         console.log("fetching product");
 
-        const response = await axios.get(
-          `http://localhost:3001/api/products/${id}`
-        );
+        const response = await axios.get(baseURL + `/${id}`);
         setProduct(response.data);
         setSelectedColor(response.data.colors[0]);
       } catch (err: any) {
@@ -38,8 +38,18 @@ export default function SingleProduct() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="w-1/2 h-1 bg-blue-500 animate-pulse"></div>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <p className="text-title text-3xl font-semibold">{error}</p>
+      </div>
+    );
 
   return (
     <section className="h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center bg-white">
