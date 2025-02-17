@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn server.ts",
+    "dev": "ts-node-dev --respawn src/server.ts",
     "start": "node build/server.js",
     "build": "tsc"
   },
@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "firebase-admin": "^13.1.0"
+    "firebase-admin": "^13.1.0",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
