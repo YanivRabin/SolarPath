@@ -1,134 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CountryData, countries } from "@/types/country";
 import CountryCard from "@/components/CountryCard";
 import ScrollToTop from "@/components/ScrollToTop";
+import axios from "axios";
+
+const baseURL = "http://localhost:3001/api/countries";
 
 export default function Contact() {
-  const [countryData, setCountryData] = useState<CountryData[]>([
-    {
-      country: "Alabama",
-      companies: [
-        {
-          name: "Bell & McCoy Lighting and Controls",
-          address: "104 23rd Street South, Suite 200",
-          city: "Birmingham",
-          state: "AL",
-          zip: "35233",
-          website: "https://www.bellandmccoy.com",
-        },
-        {
-          name: "AMA LIGHTING",
-          address: "813 Downtowner Blvd, Suite A",
-          city: "Mobile",
-          state: "AL",
-          zip: "36609",
-          website: "https://www.amalighting.com",
-        },
-      ],
-    },
-    {
-      country: "Arizona",
-      companies: [
-        {
-          name: "Arizona Lighting Sales",
-          address: "2001 W. Alameda Dr., Suite 101",
-          city: "Tempe",
-          state: "AZ",
-          zip: "85282",
-          phone: "(602) 414-9897",
-        },
-      ],
-    },
-    {
-      country: "California",
-      companies: [
-        {
-          name: "CAL Lighting",
-          address: "11000 Olson Drive, Suite 200",
-          city: "Rancho Cordova",
-          state: "CA",
-          zip: "95670",
-          phone: "(925) 242-5508",
-          website: "https://www.cal-lighting.com",
-        },
-        {
-          name: "CAL Lighting",
-          address: "4000 Executive Parkway, Suite 350",
-          city: "San Ramon",
-          state: "CA",
-          zip: "94583",
-          phone: "(925) 242-5508",
-          website: "https://www.cal-lighting.com",
-        },
-        {
-          name: "CAL Lighting",
-          address: "375 Woodworth Ave, Suite 102",
-          city: "Clovis",
-          state: "CA",
-          zip: "93612",
-          phone: "(925) 242-5508",
-          website: "https://www.cal-lighting.com",
-        },
-        {
-          name: "CAL Lighting",
-          address: "1756 Eastman Ave., Suite #112",
-          city: "Ventura",
-          state: "CA",
-          zip: "93003",
-          phone: "(925) 242-5508",
-          website: "https://www.cal-lighting.com",
-        },
-        {
-          name: "E.R.I. Electrical Representatives",
-          address: "100 Pacifica, Suite 160",
-          city: "Irvine",
-          state: "CA",
-          zip: "92618",
-          phone: "(714) 434-9008",
-          website: "https://www.erireps.com",
-        },
-        {
-          name: "OCS LIGHTING+CONTROL",
-          address: "12255 Parkway Centre Dr.",
-          city: "Poway",
-          state: "CA",
-          zip: "92064",
-          phone: "(858) 514-4000",
-          website: "https://www.ocsltg.com",
-        },
-        {
-          name: "CAL Lighting",
-          address: "1756 Eastman Ave., Suite #112",
-          city: "Ventura",
-          state: "CA",
-          zip: "93003",
-          phone: "(925) 242-5508",
-          website: "https://www.cal-lighting.com",
-        },
-        {
-          name: "E.R.I. Electrical Representatives",
-          address: "100 Pacifica, Suite 160",
-          city: "Irvine",
-          state: "CA",
-          zip: "92618",
-          phone: "(714) 434-9008",
-          website: "https://www.erireps.com",
-        },
-        {
-          name: "OCS LIGHTING+CONTROL",
-          address: "12255 Parkway Centre Dr.",
-          city: "Poway",
-          state: "CA",
-          zip: "92064",
-          phone: "(858) 514-4000",
-          website: "https://www.ocsltg.com",
-        },
-      ],
-    },
-  ]);
+  const [countryData, setCountryData] = useState<CountryData[]>([]);
 
+  useEffect(() => {
+    const fetchCountryData = async () => {
+      try {
+        const response = await axios.get(baseURL);
+        // oreder by alphabetical order
+        response.data.sort((a: CountryData, b: CountryData) =>
+          a.country.localeCompare(b.country)
+        );
+        setCountryData(response.data);
+      } catch (err: any) {
+        console.error(err.message);
+      }
+    };
+
+    fetchCountryData();
+  }, []);
+
+  // Scroll to target element
   const handleScroll = (
     event: React.MouseEvent<HTMLAnchorElement>,
     targetId: string
@@ -275,7 +175,7 @@ export default function Contact() {
         {/* Country Cards */}
         <div className="max-w-6xl mx-auto p-6">
           <div className="border-subtitle border-b" />
-          {countryData.map((data, index) => (
+          {countryData && countryData.map((data, index) => (
             <CountryCard
               key={index}
               country={data.country}

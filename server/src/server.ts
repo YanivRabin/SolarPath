@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { errorHandler } from "./middlewares/errorHandler";
 import productRoutes from "./routes/productRoutes";
-// import countryRoutes from "./routes/countryRoutes";
+import countryRoutes from "./routes/countriesRoutes";
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/products", productRoutes);
-// app.use("/api/countries", countryRoutes);
+app.use("/api/countries", countryRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
