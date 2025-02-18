@@ -13,7 +13,7 @@ export const createProduct = async (req: Request, res: Response) => {
   try {
     // Extract basic fields from the request body
     const { name, category } = req.body;
-    const sanitizedProductName = name.replace(/[^a-zA-Z0-9_-]/g, '_');
+
     if (!name || !category) {
       return res
         .status(400)
@@ -49,7 +49,7 @@ export const createProduct = async (req: Request, res: Response) => {
     let mainImageUrl = "";
     if (files && files.mainImage && files.mainImage.length > 0) {
       const mainFile = files.mainImage[0];
-      const mainFileName = `products/${sanitizedProductName}/main/${Date.now()}_${
+      const mainFileName = `products/${category}/${name}/main/${Date.now()}_${
         mainFile.originalname
       }`;
       const mainBlob = bucket.file(mainFileName);
@@ -84,7 +84,7 @@ export const createProduct = async (req: Request, res: Response) => {
         });
       }
       for (const colorFile of files.colorImages) {
-        const colorFileName = `products/${sanitizedProductName}/colors/${Date.now()}_${
+        const colorFileName = `products/${category}/${name}/colors/${Date.now()}_${
           colorFile.originalname
         }`;
         const colorBlob = bucket.file(colorFileName);

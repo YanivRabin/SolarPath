@@ -10,7 +10,7 @@ const baseURL = "http://localhost:3001/api/products";
 
 export default function Products() {
   const params = useParams();
-  const category = params.category;
+  const category = params.category?.toString().toUpperCase();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
