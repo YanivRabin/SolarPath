@@ -2,29 +2,29 @@
 
 import ImageGallery from "@/components/ImageGallery";
 import ScrollToTop from "@/components/ScrollToTop";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const images = [
-  "/projects/1.jpg",
-  "/projects/2.jpg",
-  "/projects/3.jpg",
-  "/projects/4.jpg",
-];
-
-const images2 = [
-  "/projects/5.jpg",
-  "/projects/6.jpg",
-  "/projects/7.jpg",
-  "/projects/8.jpg",
-];
-
+const baseURL = "http://localhost:3001/api/projects";
 
 export default function Projects() {
-  
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios.get(baseURL).then((res) => {
+      setImages(res.data);
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-white p-10">
-      <ImageGallery title="Area & Path Lighting" images={images} />
-      <ImageGallery title="Garden & Landscape Lighting" images={images2} />
-      <ImageGallery title="Garden & Landscape Lighting" images={images2} />
+      {images.map((project: any) => (
+        <ImageGallery
+          key={project.id}
+          title={project.title}
+          images={project.images}
+        />
+      ))}
       <ScrollToTop />
     </div>
   );

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { errorHandler } from "./middlewares/errorHandler";
 import productRoutes from "./routes/productRoutes";
 import countryRoutes from "./routes/countriesRoutes";
+import projectRoutes from "./routes/projectRoutes";
 import emailRoutes from "./routes/emailRoutes";
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(express.json());
 // Routes
 app.use("/api/products", productRoutes);
 app.use("/api/countries", countryRoutes);
+app.use("/api/projects", projectRoutes);
 app.use("/api/email", emailRoutes);
 
 // Error handling middleware
