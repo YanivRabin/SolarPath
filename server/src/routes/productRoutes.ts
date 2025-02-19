@@ -18,6 +18,7 @@ router.post(
   upload.fields([
     { name: "mainImage", maxCount: 1 },
     { name: "colorImages", maxCount: 5 },
+    { name: "specSheetLink", maxCount: 1 },
   ]),
   createProduct
 );

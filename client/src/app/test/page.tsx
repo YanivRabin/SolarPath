@@ -3,6 +3,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const baseURL = "http://localhost:3001/api/products";
+
 export default function TestProductForm() {
   // Product details
   const [name, setName] = useState("");
@@ -19,8 +21,8 @@ export default function TestProductForm() {
   // Additional info fields
   const [about, setAbout] = useState("");
   const [applications, setApplications] = useState("");
-  const [specSheet, setSpecSheet] = useState("Download Here");
-  const [specSheetLink, setSpecSheetLink] = useState("#");
+  //   const [specSheet, setSpecSheet] = useState("Download Here");
+  const [specSheetLink, setSpecSheetLink] = useState(null);
 
   // To show the response from the backend
   const [result, setResult] = useState<{ error?: string; data?: any } | null>(
@@ -40,7 +42,7 @@ export default function TestProductForm() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const formData = new FormData();
+    const formData = new FormData();    
 
     // Append basic fields
     formData.append("name", name);
@@ -65,18 +67,19 @@ export default function TestProductForm() {
     const additionalInfo = [
       { label: "About", value: about },
       { label: "Apllications", value: applications },
-      { label: "Spec Sheet", value: specSheet, link: specSheetLink },
+      { label: "Spec Sheet", value: "Donwload Here", link: specSheetLink },
     ];
     formData.append("additionalInfo", JSON.stringify(additionalInfo));
 
+    // Append spec sheet file
+    if (specSheetLink) {
+      formData.append("specSheetLink", specSheetLink);
+    }    
+
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/products",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const response = await axios.post(baseURL, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setResult(response.data);
     } catch (error: any) {
       console.error("Error uploading product:", error);
@@ -206,7 +209,7 @@ export default function TestProductForm() {
             />
           </label>
         </div>
-        <div style={{ marginBottom: "1rem" }}>
+        {/* <div style={{ marginBottom: "1rem" }}>
           <label>
             Spec Sheet (Value):
             <input
@@ -216,15 +219,14 @@ export default function TestProductForm() {
               required
             />
           </label>
-        </div>
+        </div> */}
         <div style={{ marginBottom: "1rem" }}>
           <label>
-            Spec Sheet Link:
+            Spec Sheet:
             <input
-              type="text"
-              value={specSheetLink}
-              onChange={(e) => setSpecSheetLink(e.target.value)}
-              required
+              type="file"
+              accept="application/pdf"
+              onChange={(e: any) => setSpecSheetLink(e.target.files[0])}
             />
           </label>
         </div>

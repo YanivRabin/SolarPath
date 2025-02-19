@@ -117,6 +117,39 @@ export const createProduct = async (req: Request, res: Response) => {
       }));
     }
 
+    // Process the specSheetLink
+    let specSheetLinkUrl = "";
+    if (files && files.specSheetLink && files.specSheetLink.length > 0) {
+      const specSheetFile = files.specSheetLink[0];
+      const specSheetFileName = `products/${category}/${name}/specSheet/${Date.now()}_${
+        specSheetFile.originalname
+      }`;
+      const specSheetBlob = bucket.file(specSheetFileName);
+      const specSheetBlobStream = specSheetBlob.createWriteStream({
+        metadata: {
+          contentType: specSheetFile.mimetype,
+          // Set contentDisposition to "attachment" to force download
+          contentDisposition: "attachment",
+        },
+      });
+
+      await new Promise<void>((resolve, reject) => {
+        specSheetBlobStream.on("error", (err) => {
+          console.error("Spec sheet upload error:", err);
+          reject(err);
+        });
+        specSheetBlobStream.on("finish", async () => {
+          await specSheetBlob.makePublic();
+          specSheetLinkUrl = `https://storage.googleapis.com/${bucket.name}/${specSheetBlob.name}`;
+          resolve();
+        });
+        specSheetBlobStream.end(specSheetFile.buffer);
+      });
+    }
+    if (additionalInfo.length > 0) {
+      additionalInfo[2].link = specSheetLinkUrl;
+    }
+
     // 4. Create the new product object
     const newProduct: Omit<Product, "id"> = {
       name,
