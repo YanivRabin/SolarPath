@@ -51,7 +51,7 @@ export default function ImageGallery({ title, images }: ImageGalleryProps) {
               alt={`Gallery image ${index + 1}`}
               width={100}
               height={75}
-              className="object-cover w-full h-full"
+              className="object-cover w-full max-h-24"
             />
           </div>
         ))}
