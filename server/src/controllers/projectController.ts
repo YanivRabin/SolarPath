@@ -6,6 +6,10 @@ import { ImageGalleryProps } from "../models/ImageGalleryProps";
 // Create a cache instance with a TTL of 1 hour (3600 seconds)
 const cache = new NodeCache({ stdTTL: 3600, checkperiod: 600 });
 
+// Sanitize the original name to remove invalid characters
+const sanitizeName = (originalName: string) =>
+  originalName.split(".")[0].replace(/[^a-zA-Z0-9_-]/g, "-");
+
 export const uploadProject = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
@@ -23,12 +27,9 @@ export const uploadProject = async (req: Request, res: Response) => {
 
     // Loop through each file and upload it to Firebase Storage
     for (const file of files) {
-      // Sanitize the original name to remove invalid characters
-      const sanitizedName = file.originalname
-        .split(".")[0]
-        .replace(/[^a-zA-Z0-9_-]/g, "-");
-
-      const fileName = `projects/${name}/${Date.now()}_${sanitizedName}`;
+      const fileName = `projects/${sanitizeName(name)}/${Date.now()}_${sanitizeName(
+        file.originalname
+      )}`;
       const fileUpload = bucket.file(fileName);
 
       await new Promise<void>((resolve, reject) => {

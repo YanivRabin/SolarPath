@@ -9,7 +9,8 @@ export const cache = new NodeCache({
   checkperiod: 7 * 24 * 60 * 60,
 });
 
-const sanitizeFileName = (originalName: string) =>
+// Sanitize the original name to remove invalid characters
+const sanitizeName = (originalName: string) =>
   originalName.split(".")[0].replace(/[^a-zA-Z0-9_-]/g, "-");
 
 export const createProduct = async (req: Request, res: Response) => {
@@ -52,9 +53,9 @@ export const createProduct = async (req: Request, res: Response) => {
     let mainImageUrl = "";
     if (files && files.mainImage && files.mainImage.length > 0) {
       const mainFile = files.mainImage[0];
-      const mainFileName = `products/${category}/${name}/main/${Date.now()}_${sanitizeFileName(
-        mainFile.originalname
-      )}`;
+      const mainFileName = `products/${category}/${sanitizeName(
+        name
+      )}/main/${Date.now()}_${sanitizeName(mainFile.originalname)}`;
       const mainBlob = bucket.file(mainFileName);
       const mainBlobStream = mainBlob.createWriteStream({
         metadata: { contentType: mainFile.mimetype },
@@ -87,9 +88,9 @@ export const createProduct = async (req: Request, res: Response) => {
         });
       }
       for (const colorFile of files.colorImages) {
-        const colorFileName = `products/${category}/${name}/colors/${Date.now()}_${sanitizeFileName(
-          colorFile.originalname
-        )}`;
+        const colorFileName = `products/${category}/${sanitizeName(
+          name
+        )}/colors/${Date.now()}_${sanitizeName(colorFile.originalname)}`;
         const colorBlob = bucket.file(colorFileName);
         const colorBlobStream = colorBlob.createWriteStream({
           metadata: { contentType: colorFile.mimetype },
@@ -124,9 +125,9 @@ export const createProduct = async (req: Request, res: Response) => {
     let specSheetLinkUrl = "";
     if (files && files.specSheetLink && files.specSheetLink.length > 0) {
       const specSheetFile = files.specSheetLink[0];
-      const specSheetFileName = `products/${category}/${name}/specSheet/${Date.now()}_${sanitizeFileName(
-        specSheetFile.originalname
-      )}`;
+      const specSheetFileName = `products/${category}/${sanitizeName(
+        name
+      )}/specSheet/${Date.now()}_${sanitizeName(specSheetFile.originalname)}`;
       const specSheetBlob = bucket.file(specSheetFileName);
       const specSheetBlobStream = specSheetBlob.createWriteStream({
         metadata: {
