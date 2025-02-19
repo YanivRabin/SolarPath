@@ -19,15 +19,15 @@ export default function SingleProduct() {
     image: string;
     name: string;
   } | null>(null);
+  const [applications, setApplications] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        console.log("fetching product");
-
         const response = await axios.get(baseURL + `/${id}`);
         setProduct(response.data);
         setSelectedColor(response.data.colors[0]);
+        setApplications(response.data.additionalInfo[1].value);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -71,7 +71,20 @@ export default function SingleProduct() {
                       <td className="py-3 px-4 font-medium text-subtitle">
                         {info.label}
                       </td>
-                      {info.label === "Spec Sheet" ? (
+                      {info.label === "About" && (
+                        <td className="py-3 px-4">{info.value}</td>
+                      )}
+                      {info.label === "Apllications" &&
+                        applications.length > 0 && (
+                          <td className="py-3 px-4">
+                            <ul className="list-disc list-inside">
+                              {applications.map((app, index) => (
+                                <li key={index}>{app}</li>
+                              ))}
+                            </ul>
+                          </td>
+                        )}
+                      {info.label === "Spec Sheet" && (
                         <td className="py-3 px-4">
                           <a
                             href={info.link}
@@ -80,8 +93,6 @@ export default function SingleProduct() {
                             {info.value}
                           </a>
                         </td>
-                      ) : (
-                        <td className="py-3 px-4">{info.value}</td>
                       )}
                     </tr>
                   ))}

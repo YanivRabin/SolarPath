@@ -4,6 +4,20 @@ import { useState } from "react";
 import axios from "axios";
 
 const baseURL = "http://localhost:3001/api/products";
+const applicationOptions = [
+  "Streets Lighting",
+  "Parking Lots",
+  "Residential Roads",
+  "Public Parks",
+  "Sports Lighting",
+  "High Speed way",
+  "Boardwalks",
+  "Farms",
+  "Private gardens",
+  "Access roads",
+  "Walking paths",
+];
+
 
 export default function UploadProduct() {
   // Product details
@@ -20,8 +34,7 @@ export default function UploadProduct() {
 
   // Additional info fields
   const [about, setAbout] = useState("");
-  const [applications, setApplications] = useState("");
-  //   const [specSheet, setSpecSheet] = useState("Download Here");
+  const [selectedApplications, setSelectedApplications] = useState<string[]>([]);
   const [specSheetLink, setSpecSheetLink] = useState(null);
 
   // To show the response from the backend
@@ -39,10 +52,20 @@ export default function UploadProduct() {
     { code: "#7F7F7F", name: "Grey" },
   ];
 
+  const handleCheckboxChange = (option: string) => {
+    if (selectedApplications.includes(option)) {
+      // Uncheck: remove the option
+      setSelectedApplications((prev) => prev.filter((item) => item !== option));
+    } else {
+      // Check: add the option
+      setSelectedApplications((prev) => [...prev, option]);
+    }
+  };  
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const formData = new FormData();    
+    const formData = new FormData();
 
     // Append basic fields
     formData.append("name", name);
@@ -66,7 +89,7 @@ export default function UploadProduct() {
     // Append additional info as JSON string
     const additionalInfo = [
       { label: "About", value: about },
-      { label: "Apllications", value: applications },
+      { label: "Apllications", value: selectedApplications },
       { label: "Spec Sheet", value: "Donwload Here", link: specSheetLink },
     ];
     formData.append("additionalInfo", JSON.stringify(additionalInfo));
@@ -74,7 +97,7 @@ export default function UploadProduct() {
     // Append spec sheet file
     if (specSheetLink) {
       formData.append("specSheetLink", specSheetLink);
-    }    
+    }
 
     try {
       const response = await axios.post(baseURL, formData, {
@@ -198,16 +221,22 @@ export default function UploadProduct() {
           </label>
         </div>
         <div style={{ marginBottom: "1rem" }}>
-          <label>
-            Apllications:
-            <textarea
-              value={applications}
-              onChange={(e) => setApplications(e.target.value)}
-              rows={3}
-              cols={50}
-              required
-            />
+          <label style={{ display: "block", marginBottom: "0.5rem" }}>
+            Applications:
           </label>
+          {applicationOptions.map((option) => (
+            <div key={option} style={{ marginBottom: "0.25rem" }}>
+              <label>
+                <input
+                  type="checkbox"
+                  value={option}
+                  checked={selectedApplications.includes(option)}
+                  onChange={() => handleCheckboxChange(option)}
+                />{" "}
+                {option}
+              </label>
+            </div>
+          ))}
         </div>
         <div style={{ marginBottom: "1rem" }}>
           <label>
