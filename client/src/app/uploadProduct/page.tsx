@@ -18,7 +18,6 @@ const applicationOptions = [
   "Walking paths",
 ];
 
-
 export default function UploadProduct() {
   // Product details
   const [name, setName] = useState("");
@@ -34,7 +33,9 @@ export default function UploadProduct() {
 
   // Additional info fields
   const [about, setAbout] = useState("");
-  const [selectedApplications, setSelectedApplications] = useState<string[]>([]);
+  const [selectedApplications, setSelectedApplications] = useState<string[]>(
+    []
+  );
   const [specSheetLink, setSpecSheetLink] = useState(null);
 
   // To show the response from the backend
@@ -60,7 +61,7 @@ export default function UploadProduct() {
       // Check: add the option
       setSelectedApplications((prev) => [...prev, option]);
     }
-  };  
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -130,14 +131,21 @@ export default function UploadProduct() {
         <div style={{ marginBottom: "1rem" }}>
           <label>
             Category:{" "}
-            <input
-              type="text"
+            <select
               value={category}
-              onChange={(e) => setCategory(e.target.value.toUpperCase())}
+              onChange={(e) => setCategory(e.target.value)}
               required
-            />
+            >
+              <option value="">Select a category</option>
+              <option value="All In One">All In One</option>
+              <option value="All In Two">All In Two</option>
+              <option value="Bollards">Bollards</option>
+              <option value="Cobra">Cobra</option>
+              <option value="Deco">Deco</option>
+            </select>
           </label>
         </div>
+
         <div style={{ marginBottom: "1rem" }}>
           <label>
             Main Image:{" "}

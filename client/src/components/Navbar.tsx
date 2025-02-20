@@ -86,18 +86,18 @@ export default function Navbar() {
                 <ul className="flex flex-col">
                   <li>
                     <Link
-                      href="/Applications/streets"
+                      href="/applications/streets-lighting"
                       className="block px-6 py-3 hover:bg-amber-400 hover:text-white transition"
                     >
-                      Streets
+                      Streets Lighting
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/Applications/parks"
+                      href="/applications/parking-lots"
                       className="block px-6 py-3 hover:bg-amber-400 hover:text-white transition"
                     >
-                      Parks
+                      Parking Lots
                     </Link>
                   </li>
                 </ul>

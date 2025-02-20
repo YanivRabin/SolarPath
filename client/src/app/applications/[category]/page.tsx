@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 
 const baseURL = "http://localhost:3001/api/products";
 
-export default function Products() {
+export default function Applications() {
   const params = useParams();
   const category = params.category?.toString() || "";
-  // Convert a hyphenated string to title case, e.g., "all-in-one" -> "All In One"
+  // Convert a hyphenated string to title case, e.g., "streets-lighting" -> "Streets Lighting"
   const formattedCategory = category
-    .split("-") 
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) 
-    .join(" "); 
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,9 +25,10 @@ export default function Products() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(baseURL);
-        // Filter response based on category
+        // filter products based on applications, take only the products that have the same application as the category
         const filteredProducts = response.data.filter(
-          (product: Product) => product.category === formattedCategory
+          (product: Product) =>
+            category && product.additionalInfo[1].value.includes(formattedCategory)
         );
         setProducts(filteredProducts);
       } catch (err: any) {
