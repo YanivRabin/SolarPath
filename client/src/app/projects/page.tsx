@@ -4,14 +4,13 @@ import ImageGallery from "@/components/ImageGallery";
 import ScrollToTop from "@/components/ScrollToTop";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const baseURL = "http://localhost:3001/api/projects";
+import { baseURL } from "@/types/var";
 
 export default function Projects() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get(baseURL).then((res) => {
+    axios.get(baseURL + "projects").then((res) => {
       setImages(res.data);
     });
   }, []);

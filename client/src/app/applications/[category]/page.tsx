@@ -5,8 +5,7 @@ import Link from "next/link";
 import { Product } from "@/types/product";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-const baseURL = "http://localhost:3001/api/products";
+import { baseURL } from "@/types/var";
 
 export default function Applications() {
   const params = useParams();
@@ -24,7 +23,7 @@ export default function Applications() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(baseURL);
+        const response = await axios.get(baseURL + "products");
         // filter products based on applications, take only the products that have the same application as the category
         const filteredProducts = response.data.filter(
           (product: Product) =>

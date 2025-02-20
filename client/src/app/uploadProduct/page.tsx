@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { baseURL } from "@/types/var";
 
-const baseURL = "http://localhost:3001/api/products";
 const applicationOptions = [
   "Streets Lighting",
   "Parking Lots",
@@ -101,7 +101,7 @@ export default function UploadProduct() {
     }
 
     try {
-      const response = await axios.post(baseURL, formData, {
+      const response = await axios.post(baseURL + "products", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setResult(response.data);

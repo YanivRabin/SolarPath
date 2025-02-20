@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import { useParams } from "next/navigation";
 import axios from "axios";
-
-const baseURL = "http://localhost:3001/api/products";
+import { baseURL } from "@/types/var";
 
 export default function SingleProduct() {
   const params = useParams();
@@ -24,7 +23,7 @@ export default function SingleProduct() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(baseURL + `/${id}`);
+        const response = await axios.get(baseURL + "products" + `/${id}`);
         setProduct(response.data);
         setSelectedColor(response.data.colors[0]);
         setApplications(response.data.additionalInfo[1].value);

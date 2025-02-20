@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-
-const baseURL = "http://localhost:3001/api/projects";
+import { baseURL } from "@/types/var";
 
 export default function UploadProject() {
   const [name, setName] = useState("");
@@ -21,7 +20,7 @@ export default function UploadProject() {
       }
     }
     try {
-      const response = await axios.post(baseURL, formData, {
+      const response = await axios.post(baseURL + "projects", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("Project uploaded:", response.data);
