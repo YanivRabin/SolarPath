@@ -6,6 +6,7 @@ import productRoutes from "./routes/productRoutes";
 import countryRoutes from "./routes/countriesRoutes";
 import projectRoutes from "./routes/projectRoutes";
 import emailRoutes from "./routes/emailRoutes";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/countries", countryRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/email", emailRoutes);
+app.use("/api/auth", authRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
