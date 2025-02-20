@@ -10,7 +10,7 @@ export default function Projects() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get(baseURL + "projects").then((res) => {
+    axios.get(`${baseURL}/projects`).then((res) => {
       setImages(res.data);
     });
   }, []);

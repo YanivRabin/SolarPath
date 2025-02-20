@@ -20,7 +20,7 @@ export default function UploadProject() {
       }
     }
     try {
-      const response = await axios.post(baseURL + "projects", formData, {
+      const response = await axios.post(`${baseURL}/projects`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("Project uploaded:", response.data);

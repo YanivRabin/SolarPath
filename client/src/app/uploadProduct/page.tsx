@@ -101,7 +101,7 @@ export default function UploadProduct() {
     }
 
     try {
-      const response = await axios.post(baseURL + "products", formData, {
+      const response = await axios.post(`${baseURL}/products`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setResult(response.data);

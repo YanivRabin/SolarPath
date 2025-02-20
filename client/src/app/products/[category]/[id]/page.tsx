@@ -23,7 +23,7 @@ export default function SingleProduct() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(baseURL + "products" + `/${id}`);
+        const response = await axios.get(`${baseURL}/products/${id}`);
         setProduct(response.data);
         setSelectedColor(response.data.colors[0]);
         setApplications(response.data.additionalInfo[1].value);

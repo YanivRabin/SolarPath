@@ -5,8 +5,7 @@ import { CountryData, countries } from "@/types/country";
 import CountryCard from "@/components/CountryCard";
 import ScrollToTop from "@/components/ScrollToTop";
 import axios from "axios";
-
-const baseURL = "http://localhost:3001/api/countries";
+import { baseURL } from "@/types/var";
 
 export default function Contact() {
   const [countryData, setCountryData] = useState<CountryData[]>([]);
@@ -14,7 +13,7 @@ export default function Contact() {
   useEffect(() => {
     const fetchCountryData = async () => {
       try {
-        const response = await axios.get(baseURL);
+        const response = await axios.get(`${baseURL}/countries`);
         // oreder by alphabetical order
         response.data.sort((a: CountryData, b: CountryData) =>
           a.country.localeCompare(b.country)

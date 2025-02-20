@@ -23,7 +23,7 @@ export default function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(baseURL + "products");
+        const response = await axios.get(`${baseURL}/products`);
         // Filter response based on category
         const filteredProducts = response.data.filter(
           (product: Product) => product.category === formattedCategory

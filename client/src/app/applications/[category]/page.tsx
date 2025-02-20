@@ -23,7 +23,7 @@ export default function Applications() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(baseURL + "products");
+        const response = await axios.get(`${baseURL}/products`);
         // filter products based on applications, take only the products that have the same application as the category
         const filteredProducts = response.data.filter(
           (product: Product) =>
