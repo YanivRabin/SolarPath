@@ -179,40 +179,6 @@ export const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-// export const createProduct = async (req: Request, res: Response) => {
-//   try {
-//     const { name, category, image, colors, additionalInfo } = req.body;
-
-//     // Validate required fields
-//     if (!name || !category || !image || !colors || !additionalInfo) {
-//       return res.status(400).json({ error: "Missing required fields" });
-//     }
-
-//     // Use Product model for TypeScript safety
-//     const newProduct: Omit<Product, "id"> = {
-//       name,
-//       category,
-//       image,
-//       colors,
-//       additionalInfo,
-//       createdAt: new Date(), // Timestamp
-//     };
-
-//     // Add product to Firestore
-//     const docRef = await db.collection("products").add(newProduct);
-//     const productWithId: Product = { id: docRef.id, ...newProduct };
-
-//     // Update cache instead of clearing it
-//     const cachedProducts = (cache.get("products") as Product[]) || [];
-//     cache.set("products", [...cachedProducts, productWithId]);
-
-//     res.status(201).json(productWithId);
-//   } catch (error) {
-//     console.error("Error creating product:", error);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// };
-
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
     // Check if products exist in cache

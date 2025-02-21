@@ -19,3 +19,23 @@ export interface ProductInfo {
   value: string;
   link?: string;
 }
+
+export interface BackOfficeProductProps {
+  products: Product[];
+  onEdit?: (product: Product) => void;
+  onDelete?: (product: Product) => void;
+}
+
+export const applicationOptions = [
+  "Streets Lighting",
+  "Parking Lots",
+  "Residential Roads",
+  "Public Parks",
+  "Sports Lighting",
+  "High Speed way",
+  "Boardwalks",
+  "Farms",
+  "Private gardens",
+  "Access roads",
+  "Walking paths",
+];

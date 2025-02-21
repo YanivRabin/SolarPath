@@ -10,22 +10,21 @@ const navigation = [
     name: "Products",
     children: [
       { name: "All Products", href: "/back-office/products" },
-      { name: "Create New Product", href: "/back-office/products/create" },
-      { name: "Categories", href: "/back-office/products/categories" },
+      { name: "Add New Product", href: "/back-office/products/add-new-product" },
     ],
   },
   {
     name: "Projects",
     children: [
       { name: "All Projects", href: "/back-office/projects" },
-      { name: "Add New Project", href: "/back-office/projects/create" },
+      { name: "Add New Project", href: "/back-office/projects/add-new-project" },
     ],
   },
   {
     name: "Contacts",
     children: [
       { name: "All Contacts", href: "/back-office/contacts" },
-      { name: "Add New Contact", href: "/back-office/contacts/create" },
+      { name: "Add New Contact", href: "/back-office/contacts/add-new-contact" },
     ],
   },
 ];
