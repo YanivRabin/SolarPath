@@ -4,36 +4,37 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import logo from "../../public/logo/solarpath-logo.png";
-import { usePathname } from "next/navigation";
-import BackOfficeNavbar from "./BackOfficeNavbar";
 
 export default function Navbar() {
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
-  const [applicationsDropdownOpen, setApplicationsDropdownOpen] = useState(false);
+  const [applicationsDropdownOpen, setApplicationsDropdownOpen] =
+    useState(false);
 
-  const pathname = usePathname();
-
-  // If the current path starts with "/back-office", render the back-office navbar
-  if (pathname.startsWith("/back-office")) {
-    return <BackOfficeNavbar />;
-  }
   return (
     <nav className="h-24 shadow-md fixed top-0 left-0 w-full bg-white z-50">
-  <div className="flex justify-between items-center h-full px-16">
+      <div className="flex justify-between items-center h-full px-16">
         {/* Logo */}
         <Link href="/">
-          <Image src={logo} alt="SolarPath Logo" width={180} height={50} priority />
+          <Image
+            src={logo}
+            alt="SolarPath Logo"
+            width={180}
+            height={50}
+            priority
+          />
         </Link>
 
         {/* Navigation Links */}
         <div className="relative space-x-8 text-title text-lg font-medium flex items-center">
           {/* Products Dropdown */}
-          <div 
+          <div
             className="relative"
             onMouseEnter={() => setProductsDropdownOpen(true)}
             onMouseLeave={() => setProductsDropdownOpen(false)}
           >
-            <span className="hover:text-amber-400 transition cursor-pointer">Products</span>
+            <span className="hover:text-amber-400 transition cursor-pointer">
+              Products
+            </span>
             {productsDropdownOpen && (
               <div className="absolute left-0 w-64 bg-white shadow-lg rounded-lg border border-gray-200 pt-2">
                 <ul className="flex flex-col">
@@ -83,12 +84,14 @@ export default function Navbar() {
           </div>
 
           {/* Applications Dropdown */}
-          <div 
+          <div
             className="relative"
             onMouseEnter={() => setApplicationsDropdownOpen(true)}
             onMouseLeave={() => setApplicationsDropdownOpen(false)}
           >
-            <span className="hover:text-amber-400 transition cursor-pointer">Applications</span>
+            <span className="hover:text-amber-400 transition cursor-pointer">
+              Applications
+            </span>
             {applicationsDropdownOpen && (
               <div className="absolute left-0 w-64 bg-white shadow-lg rounded-lg border border-gray-200 pt-2">
                 <ul className="flex flex-col">
@@ -114,10 +117,18 @@ export default function Navbar() {
           </div>
 
           {/* Other Links */}
-          <Link href="/services" className="hover:text-amber-400 transition">Services</Link>
-          <Link href="/projects" className="hover:text-amber-400 transition">Projects</Link>
-          <Link href="/about" className="hover:text-amber-400 transition">About</Link>
-          <Link href="/contact" className="hover:text-amber-400 transition">Contact</Link>
+          <Link href="/services" className="hover:text-amber-400 transition">
+            Services
+          </Link>
+          <Link href="/projects" className="hover:text-amber-400 transition">
+            Projects
+          </Link>
+          <Link href="/about" className="hover:text-amber-400 transition">
+            About
+          </Link>
+          <Link href="/contact" className="hover:text-amber-400 transition">
+            Contact
+          </Link>
         </div>
       </div>
     </nav>
