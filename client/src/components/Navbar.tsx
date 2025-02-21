@@ -4,14 +4,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import logo from "../../public/logo/solarpath-logo.png";
+import { usePathname } from "next/navigation";
+import BackOfficeNavbar from "./BackOfficeNavbar";
 
 export default function Navbar() {
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [applicationsDropdownOpen, setApplicationsDropdownOpen] = useState(false);
 
+  const pathname = usePathname();
+
+  // If the current path starts with "/back-office", render the back-office navbar
+  if (pathname.startsWith("/back-office")) {
+    return <BackOfficeNavbar />;
+  }
   return (
-    <nav className="p-4 shadow-md fixed top-0 left-0 w-full bg-white z-50">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="h-24 shadow-md fixed top-0 left-0 w-full bg-white z-50">
+  <div className="flex justify-between items-center h-full px-16">
         {/* Logo */}
         <Link href="/">
           <Image src={logo} alt="SolarPath Logo" width={180} height={50} priority />

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { baseURL } from "@/types/var";
 
 export default function AdminLogin() {
@@ -10,20 +11,21 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: { preventDefault: () => void }) => {
+  const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    console.log("Logging in...");
     setLoading(true);
     setError("");
-    
+
     try {
       const response = await axios.post(`${baseURL}/auth/signin`, {
         username,
         password,
       });
-      console.log("Login successful:", response.data);
-      // Handle successful login redirect to back-office
-      window.location.href = "/back-office";
+      // Set the cookie for 1 day
+      Cookies.set("session", response.data.token, { expires: 1 });
+
+      // Redirect to the back-office dashboard
+      window.location.href = "/back-office/dashboard";
     } catch (err) {
       setError("Invalid credentials. Please try again.");
       console.error("Login error:", err);
@@ -33,7 +35,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-80px)] overflow-hidden bg-white">
+    <div className="flex items-center justify-center h-[calc(100vh-80px)] p-8 overflow-hidden bg-white">
       <form
         onSubmit={handleLogin}
         className="bg-bgPrimary p-12 rounded shadow-md w-full max-w-sm border-title border"

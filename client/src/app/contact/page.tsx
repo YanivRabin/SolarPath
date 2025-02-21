@@ -47,7 +47,7 @@ export default function Contact() {
 
   return (
     <div>
-      <section className="py-10 bg-bgPrimary">
+      <section className="py-20 bg-bgPrimary">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-3xl  text-title leading-snug ">
             We are actively looking for resellers in the US and around the world
