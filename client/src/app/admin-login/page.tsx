@@ -24,8 +24,8 @@ export default function AdminLogin() {
       // Set the cookie for 1 day
       Cookies.set("session", response.data.token, { expires: 1 });
 
-      // Redirect to the back-office dashboard
-      window.location.href = "/back-office/dashboard";
+      // Redirect to the back-office products page
+      window.location.href = "/back-office/products";
     } catch (err) {
       setError("Invalid credentials. Please try again.");
       console.error("Login error:", err);

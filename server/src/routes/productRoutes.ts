@@ -3,6 +3,7 @@ import {
   getAllProducts,
   getProduct,
   createProduct,
+  deleteProduct
 } from "../controllers/productController";
 import multer from "multer";
 
@@ -20,5 +21,6 @@ router.post(
   ]),
   createProduct
 );
+router.delete("/:id", deleteProduct);
 
 export default router;

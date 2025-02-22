@@ -168,7 +168,7 @@ export const createProduct = async (req: Request, res: Response) => {
     const docRef = await db.collection("products").add(newProduct);
     const productWithId: Product = { id: docRef.id, ...newProduct };
 
-    // Optionally update cache
+    // update cache
     const cachedProducts = (cache.get("products") as Product[]) || [];
     cache.set("products", [...cachedProducts, productWithId]);
 
@@ -233,6 +233,48 @@ export const getProduct = async (req: Request, res: Response) => {
     res.json(product);
   } catch (error) {
     console.error("Error fetching product:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Retrieve the product document first
+    const docRef = db.collection("products").doc(id);
+    const docSnapshot = await docRef.get();
+    if (!docSnapshot.exists) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const productData = docSnapshot.data() as Product;
+    const { category, name } = productData;
+
+    // Build the folder prefix for this product's images
+    const folderPrefix = `products/${category}/${sanitizeName(name)}`;
+
+    // Delete all files in the folder from storage
+    await bucket.deleteFiles({ prefix: folderPrefix });
+
+    // Now delete the product document from Firestore
+    await docRef.delete();
+
+    // Remove the product from cache
+    cache.del(id);
+
+    // Update the cache of all products
+    const cachedProducts = cache.get("products") as Product[];
+    if (cachedProducts) {
+      cache.set(
+        "products",
+        cachedProducts.filter((product) => product.id !== id)
+      );
+    }
+
+    res.json({ message: "Product deleted" });
+  } catch (error) {
+    console.error("Error deleting product:", error);
     res.status(500).json({ error: "Server error" });
   }
 };

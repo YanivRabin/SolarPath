@@ -12,12 +12,12 @@ export default function AddNewProduct() {
   const [category, setCategory] = useState("");
 
   // Color image files
-  const [mainImage, setMainImage] = useState<File | null>(null);
-  const [blackImage, setBlackImage] = useState<File | null>(null);
-  const [whiteImage, setWhiteImage] = useState<File | null>(null);
-  const [bronzeImage, setBronzeImage] = useState<File | null>(null);
-  const [silverImage, setSilverImage] = useState<File | null>(null);
-  const [greyImage, setGreyImage] = useState<File | null>(null);
+  const [mainImage, setMainImage] = useState<File>();
+  const [blackImage, setBlackImage] = useState<File>();
+  const [whiteImage, setWhiteImage] = useState<File>();
+  const [bronzeImage, setBronzeImage] = useState<File>();
+  const [silverImage, setSilverImage] = useState<File>();
+  const [greyImage, setGreyImage] = useState<File>();
 
   // Additional info fields
   const [about, setAbout] = useState("");
@@ -159,6 +159,12 @@ export default function AddNewProduct() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!mainImage) {
+      alert("Main image is required");
+      return;
+    }
+
     setLoading(true);
     const formData = new FormData();
 
@@ -224,162 +230,166 @@ export default function AddNewProduct() {
           >
             {/* LEFT (70%) */}
             <div className="w-8/12 pr-6">
-              {/* Product Name */}
-              <div className="mb-4">
-                <input
-                  type="text"
-                  value={name}
-                  placeholder="Product Name"
-                  onChange={(e) => setName(e.target.value.toUpperCase())}
-                  required
-                  className="block w-full p-2 placeholder:font-bold placeholder:text-xl border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 uppercase"
-                />
-              </div>
-
-              {/* Product Data */}
-              <div className="mx-auto bg-white shadow-md rounded">
-                {/* Top Title */}
-                <h1 className="text-xl font-bold p-4 bg-gray-200 text-gray-900 mb-6">
-                  Product Data
-                </h1>
-
-                {/* Main Container: Sidebar (Tabs) + Content */}
-                <div className="flex w-full" style={{ height: "333px" }}>
-                  {/* Left Sidebar (Tabs) */}
-                  <div className="w-1/4 border-r border-gray-200 mr-4 pb-4">
-                    <ul className="space-y-2">
-                      <li>
-                        <button
-                          type="button"
-                          className={`block w-full text-left p-2 hover:bg-gray-100 ${
-                            activeTab === "about"
-                              ? "bg-gray-200 font-semibold"
-                              : ""
-                          }`}
-                          onClick={() => setActiveTab("about")}
-                        >
-                          About
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          className={`block w-full text-left p-2 hover:bg-gray-100 ${
-                            activeTab === "applications"
-                              ? "bg-gray-200 font-semibold"
-                              : ""
-                          }`}
-                          onClick={() => setActiveTab("applications")}
-                        >
-                          Applications
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          className={`block w-full text-left p-2 hover:bg-gray-100 ${
-                            activeTab === "colors"
-                              ? "bg-gray-200 font-semibold"
-                              : ""
-                          }`}
-                          onClick={() => setActiveTab("colors")}
-                        >
-                          Colors
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          className={`block w-full text-left p-2 hover:bg-gray-100 ${
-                            activeTab === "spec sheet"
-                              ? "bg-gray-200 font-semibold"
-                              : ""
-                          }`}
-                          onClick={() => setActiveTab("spec sheet")}
-                        >
-                          Spec Sheet
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Right Content Area */}
-                  <div className="w-3/4">{renderTabContent()}</div>
+              <fieldset disabled={loading} className="w-full">
+                {/* Product Name */}
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    value={name}
+                    placeholder="Product Name"
+                    onChange={(e) => setName(e.target.value.toUpperCase())}
+                    required
+                    className="block w-full p-2 placeholder:font-bold placeholder:text-xl border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 uppercase"
+                  />
                 </div>
-              </div>
+
+                {/* Product Data */}
+                <div className="mx-auto bg-white shadow-md rounded">
+                  {/* Top Title */}
+                  <h1 className="text-xl font-bold p-4 bg-gray-200 text-gray-900 mb-6">
+                    Product Data
+                  </h1>
+
+                  {/* Main Container: Sidebar (Tabs) + Content */}
+                  <div className="flex w-full" style={{ height: "333px" }}>
+                    {/* Left Sidebar (Tabs) */}
+                    <div className="w-1/4 border-r border-gray-200 mr-4 pb-4">
+                      <ul className="space-y-2">
+                        <li>
+                          <button
+                            type="button"
+                            className={`block w-full text-left p-2 hover:bg-gray-100 ${
+                              activeTab === "about"
+                                ? "bg-gray-200 font-semibold"
+                                : ""
+                            }`}
+                            onClick={() => setActiveTab("about")}
+                          >
+                            About
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            className={`block w-full text-left p-2 hover:bg-gray-100 ${
+                              activeTab === "applications"
+                                ? "bg-gray-200 font-semibold"
+                                : ""
+                            }`}
+                            onClick={() => setActiveTab("applications")}
+                          >
+                            Applications
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            className={`block w-full text-left p-2 hover:bg-gray-100 ${
+                              activeTab === "colors"
+                                ? "bg-gray-200 font-semibold"
+                                : ""
+                            }`}
+                            onClick={() => setActiveTab("colors")}
+                          >
+                            Colors
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            className={`block w-full text-left p-2 hover:bg-gray-100 ${
+                              activeTab === "spec sheet"
+                                ? "bg-gray-200 font-semibold"
+                                : ""
+                            }`}
+                            onClick={() => setActiveTab("spec sheet")}
+                          >
+                            Spec Sheet
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Right Content Area */}
+                    <div className="w-3/4">{renderTabContent()}</div>
+                  </div>
+                </div>
+              </fieldset>
             </div>
 
             {/* RIGHT (30%) */}
             <div className="w-4/12">
-              {/* Category */}
-              <div className="mb-6">
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                  className="mt-1 p-2 w-full text-xl rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                >
-                  <option value="">Select a category</option>
-                  <option value="All In One">All In One</option>
-                  <option value="All In Two">All In Two</option>
-                  <option value="Bollards">Bollards</option>
-                  <option value="Cobra">Cobra</option>
-                  <option value="Deco">Deco</option>
-                </select>
-              </div>
+              <fieldset disabled={loading} className="w-full">
+                {/* Category */}
+                <div className="mb-6">
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    required
+                    className="mt-1 p-2 w-full text-xl rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    <option value="">Select a category</option>
+                    <option value="All In One">All In One</option>
+                    <option value="All In Two">All In Two</option>
+                    <option value="Bollards">Bollards</option>
+                    <option value="Cobra">Cobra</option>
+                    <option value="Deco">Deco</option>
+                  </select>
+                </div>
 
-              {/* Main Image */}
-              <div className="mb-6">
-                <div className="flex items-center">
-                  {/* Custom "Choose File" button */}
-                  <label
-                    className="w-full p-3 font-semibold cursor-pointer 
+                {/* Main Image */}
+                <div className="mb-6">
+                  <div className="flex items-center">
+                    {/* Custom "Choose File" button */}
+                    <label
+                      className="w-full p-3 font-semibold cursor-pointer 
              flex items-center justify-center 
              bg-indigo-100 text-sky-900 rounded 
              hover:bg-sky-600 hover:text-white text-center"
-                  >
-                    Main Image
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        if (e.target.files && e.target.files[0]) {
-                          setMainImage(e.target.files[0]);
-                        }
-                      }}
-                      className="hidden"
-                      required
-                    />
-                  </label>
-                </div>
+                    >
+                      Main Image
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          if (e.target.files && e.target.files[0]) {
+                            setMainImage(e.target.files[0]);
+                          }
+                        }}
+                        className="hidden"
+                        required
+                      />
+                    </label>
+                  </div>
 
-                {/* Show file name if one is selected */}
-                <div className="mt-2 flex items-center text-sm text-gray-700">
+                  {/* Show file name if one is selected */}
+                  <div className="mt-2 flex items-center text-sm text-gray-700">
+                    {mainImage && (
+                      <span className="text-gray-700">{mainImage.name}</span>
+                    )}
+                  </div>
+
+                  {/* Display a larger preview below, if desired */}
                   {mainImage && (
-                    <span className="text-gray-700">{mainImage.name}</span>
+                    <div className="mt-4">
+                      <img
+                        src={URL.createObjectURL(mainImage)}
+                        alt="Preview"
+                        className="w-f h-64 object-contain rounded border border-gray-300"
+                      />
+                    </div>
                   )}
                 </div>
 
-                {/* Display a larger preview below, if desired */}
-                {mainImage && (
-                  <div className="mt-4">
-                    <img
-                      src={URL.createObjectURL(mainImage)}
-                      alt="Preview"
-                      className="w-f h-64 object-contain rounded border border-gray-300"
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3 font-semibold rounded bg-indigo-100 text-sky-900 hover:bg-sky-600 hover:text-white"
-              >
-                {loading ? "Creating..." : "Create Product"}
-              </button>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 font-semibold rounded bg-indigo-100 text-sky-900 hover:bg-sky-600 hover:text-white"
+                >
+                  {loading ? "Creating..." : "Create Product"}
+                </button>
+              </fieldset>
             </div>
           </form>
         </section>

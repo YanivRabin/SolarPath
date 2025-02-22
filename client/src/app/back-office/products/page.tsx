@@ -11,8 +11,6 @@ export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [searchTerm, setSearchTerm] = useState("");
-
-  // Example categories
   const [categories, setCategories] = useState([
     "All Products",
     "All In One",
@@ -21,6 +19,7 @@ export default function Products() {
     "Cobra",
     "Deco",
   ]);
+  const [processing, setProcessing] = useState(false);
 
   // Fetch products on mount
   useEffect(() => {
@@ -49,24 +48,28 @@ export default function Products() {
         : product.category === selectedCategory
     )
     .filter((product) =>
-      searchTerm === ""
-        ? true
-        : product.name.includes(searchTerm)
+      searchTerm === "" ? true : product.name.includes(searchTerm)
     );
 
-  // Handlers for edit/delete
   const handleEdit = (product: Product) => {
     console.log("Editing product:", product);
     // For example, open an edit modal or navigate to an edit page
   };
 
   const handleDelete = (product: Product) => {
-    console.log("Deleting product:", product);
-    // For example, show a confirmation dialog and call an API to delete
+    setProcessing(true);
+    axios
+      .delete(`${baseURL}/products/${product.id}`)
+      .then(() => {
+        setProducts((prev) => prev.filter((p) => p.id !== product.id)); 
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setProcessing(false));
   };
 
   return (
     <ProtectedContent>
+      <fieldset disabled={processing} className="w-full">
       <div className="ml-64 h-screen overflow-y-auto bg-white">
         {/* header */}
         <section>
@@ -121,6 +124,7 @@ export default function Products() {
           />
         </section>
       </div>
+      </fieldset>
     </ProtectedContent>
   );
 }
