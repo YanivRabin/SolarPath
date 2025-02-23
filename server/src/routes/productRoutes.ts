@@ -3,7 +3,8 @@ import {
   getAllProducts,
   getProduct,
   createProduct,
-  deleteProduct
+  deleteProduct,
+  updateProduct,
 } from "../controllers/productController";
 import multer from "multer";
 
@@ -22,5 +23,14 @@ router.post(
   createProduct
 );
 router.delete("/:id", deleteProduct);
+router.put(
+  "/:id",
+  upload.fields([
+    { name: "mainImage", maxCount: 1 },
+    { name: "colorImages", maxCount: 5 },
+    { name: "specSheetLink", maxCount: 1 },
+  ]),
+  updateProduct
+);
 
 export default router;

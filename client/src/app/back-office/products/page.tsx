@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import ProtectedContent from "@/components/ProtectedContent";
 import BackOfficeProduct from "@/components/BackOfficeProduct";
@@ -8,6 +9,8 @@ import { Product } from "@/types/product";
 import { baseURL } from "@/types/var";
 
 export default function Products() {
+  const router = useRouter();
+
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,8 +55,8 @@ export default function Products() {
     );
 
   const handleEdit = (product: Product) => {
-    console.log("Editing product:", product);
-    // For example, open an edit modal or navigate to an edit page
+    // Redirect to add-new-product page with product id
+    router.push(`/back-office/products/add-new-product?productId=${product.id}`);
   };
 
   const handleDelete = (product: Product) => {
